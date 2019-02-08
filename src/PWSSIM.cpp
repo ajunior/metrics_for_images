@@ -5,6 +5,7 @@
 void PWSSIM::computePWSSIM(cv::Mat& ref_img, cv::Mat& test_img){
 	t0 = clock();
     PWSSIM = 0;
+
 	double C1 = 6.5025, C2 = 58.5225,
 		   avg_Ref = 0, avg_Test = 0,
 		   std_Ref = 0, std_Test = 0,
@@ -13,14 +14,11 @@ void PWSSIM::computePWSSIM(cv::Mat& ref_img, cv::Mat& test_img){
 	double avg_Ref_sobel = 0,
 		   std_Ref_sobel = 0,
 		   total_std_Ref_sobel = 0;
-	int coefs[2];
 
-	int noFrames = 1;
 	int noLines= ref_img.rows;
 	int noCols = ref_img.cols;
 
 	int blocks=8;
-    int scale = 1;
     int delta = 0;
 
     Mat sobel, src;
@@ -44,9 +42,9 @@ void PWSSIM::computePWSSIM(cv::Mat& ref_img, cv::Mat& test_img){
                 }
                 avg_Ref /= (blocks*blocks);
 
-                    avg_Test /= (blocks*blocks);
+                avg_Test /= (blocks*blocks);
 
-                    avg_Ref_sobel /= (blocks*blocks);
+                avg_Ref_sobel /= (blocks*blocks);
 
 
             for(int i = column; i < (column+blocks); i++)
