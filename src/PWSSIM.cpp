@@ -5,7 +5,6 @@
 void PWSSIM::computePWSSIM(cv::Mat& ref_img, cv::Mat& test_img){
 	t0 = clock();
     PWSSIM = 0;
-
 	double C1 = 6.5025, C2 = 58.5225,
 		   avg_Ref = 0, avg_Test = 0,
 		   std_Ref = 0, std_Test = 0,
@@ -19,13 +18,10 @@ void PWSSIM::computePWSSIM(cv::Mat& ref_img, cv::Mat& test_img){
 	int noCols = ref_img.cols;
 
 	int blocks=8;
-    int delta = 0;
 
     Mat sobel, src;
-    Sobel(ref_img, sobel, CV_32F, 1, 0);
-
-    //calcular sobel
-
+    Sobel(ref_img, sobel,CV_32F,  1, 0, 3, 1, 0, BORDER_DEFAULT );
+    // imshow("teste", sobel);
     for(int line = 0; line < noLines; line += blocks)
         for(int column = 0; column < noCols; column += blocks)
         {
@@ -73,25 +69,24 @@ void PWSSIM::computePWSSIM(cv::Mat& ref_img, cv::Mat& test_img){
                 }
             }
 
-                cov_RefTest /= (blocks*blocks-1);
+            cov_RefTest /= (blocks*blocks-1);
 
 
+            PWSSIM += (((2*avg_Ref*avg_Test + C1)*(2*cov_RefTest + C2))/
+                        ((avg_Ref*avg_Ref + avg_Test*avg_Test + C1)*(std_Ref*std_Ref + std_Test*std_Test + C2)))*std_Ref_sobel;
 
-                PWSSIM += (((2*avg_Ref*avg_Test + C1)*(2*cov_RefTest + C2))/
-                            ((avg_Ref*avg_Ref + avg_Test*avg_Test + C1)*(std_Ref*std_Ref + std_Test*std_Test + C2)))*std_Ref_sobel;
-
-                avg_Ref = 0;  avg_Test = 0;
-                std_Ref = 0;  std_Test = 0;
-                cov_RefTest = 0;
-                avg_Ref_sobel = 0;
-                std_Ref_sobel = 0;
+            avg_Ref = 0;  avg_Test = 0;
+            std_Ref = 0;  std_Test = 0;
+            cov_RefTest = 0;
+            avg_Ref_sobel = 0;
+            std_Ref_sobel = 0;
         }
 
 	PWSSIM /= total_std_Ref_sobel;
 
 	t = clock();
 	deltat = (t - t0)/CLOCKS_PER_SEC;
-    cout << "Resultado PWSSIM: " << PWSSIM << endl;
+    std::cout << "Resultado PWSSIM: " << PWSSIM << endl;
 
 }
 void PWSSIM::writeResultsInFile()
@@ -99,7 +94,7 @@ void PWSSIM::writeResultsInFile()
     ofstream Name("store/PWSSIM.txt", ios::app);
     ofstream time_exec("store/PWSSIM_Timeexec.txt", ios::app);
     if(!Name || !time_exec)
-    	cout << "The file couldn't open" << endl;
+    	std::cout << "The file couldn't open" << endl;
 
     else
     {
