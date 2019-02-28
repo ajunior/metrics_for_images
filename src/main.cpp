@@ -27,7 +27,7 @@ using namespace std;
 
 int main (int argc, char const* argv[]){
 	int n; 
-	string metodo1 = "_Frank_xy.png", metodo2 = "_xy.png", arquivo = "";
+	string metodo1 = "_Frank_xy.png", metodo2 = "_xy.png", arquivo = "sample/";
 
 	while (cin >> arquivo){
 		std::stringstream string_buffer_m1;
