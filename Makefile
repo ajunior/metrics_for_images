@@ -24,7 +24,10 @@ LDFLAGS = \
 	-lopencv_imgcodecs\
 
 SOURCES = \
-    main.cpp
+	PSNR_GPDS.cpp\
+	PWSSIM.cpp\
+	SSIM.cpp\
+    	main.cpp
 
 
 .SUFFIXES: .cpp .o .h
