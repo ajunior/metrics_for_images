@@ -34,8 +34,8 @@ double PSNR_GPDS::getPSNR()
 void PSNR_GPDS::writeResultsInFile()
 {
 
-	ofstream Name("store/PSNR.txt", ios::app);
-	ofstream time_exec("store/PSNR_Timeexec.txt",ios::app);
+	ofstream Name("results/PSNR.txt", ios::app);
+	ofstream time_exec("results/PSNR_Timeexec.txt",ios::app);
 	if (!Name || !time_exec)
 		cout << "File couldn't open!!!" << endl;
 	else

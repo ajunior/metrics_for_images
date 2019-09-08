@@ -69,8 +69,8 @@ void SSIM::computeSSIM(cv::Mat& ref_img, cv::Mat& test_img){
 void SSIM::writeResultsInFile()
 {
    	ofstream Name;
-	ofstream time_exec("store/SSIM_Timeexec.txt",ios::app);
-	Name.open("store/SSIM.txt", ios::app);
+	ofstream time_exec("results/SSIM_Timeexec.txt",ios::app);
+	Name.open("results/SSIM.txt", ios::app);
 	if (!Name || !time_exec)
 		cout << "The file couldn't open" << endl;
 

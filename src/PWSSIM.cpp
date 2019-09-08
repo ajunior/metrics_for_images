@@ -91,8 +91,8 @@ void PWSSIM::computePWSSIM(cv::Mat& ref_img, cv::Mat& test_img){
 }
 void PWSSIM::writeResultsInFile()
 {
-    ofstream Name("store/PWSSIM.txt", ios::app);
-    ofstream time_exec("store/PWSSIM_Timeexec.txt", ios::app);
+    ofstream Name("results/PWSSIM.txt", ios::app);
+    ofstream time_exec("results/PWSSIM_Timeexec.txt", ios::app);
     if(!Name || !time_exec)
     	std::cout << "The file couldn't open" << endl;
 
