@@ -31,7 +31,7 @@ int main (int argc, char const* argv[]){
 
 	if (!file_eva || !file_ref) {
 		cout << "Arquivo não encontrado" << endl;
-		exit(1);   // call system to stop
+		exit(1);
 	}
 
 	string ref_img, eva_img;
